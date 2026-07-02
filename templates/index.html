@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kyda Kids Recommendation System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="header-card">
+      <h1>KYDA<span>KIDS</span></h1>
+      <h2>Kyda Kids Recommendation System</h2>
+      <div class="nav-links">
+        <a href="{{ url_for('sales_analysis') }}">Sales Trend Analysis</a>
+        <a href="{{ url_for('feedback_analysis') }}">Feedback Analysis</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #fafafa;
+  margin: 0;
+  color: #222;
+}
+
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.header-card {
+  background: linear-gradient(135deg, #ff8ba0, #ff5f7e);
+  border-radius: 16px;
+  text-align: center;
+  padding: 40px 20px;
+  color: white;
+}
+
+.header-card h1 {
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+.header-card h1 span {
+  color: #1e63ff;
+}
+
+.header-card h2 {
+  background: #1565ff;
+  display: inline-block;
+  padding: 14px 30px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.nav-links a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.topnav {
+  background: #1565ff;
+  padding: 14px 30px;
+}
+.topnav a {
+  color: white;
+  margin-right: 25px;
+  text-decoration: none;
+  font-weight: 600;
+}
+.topnav a.active {
+  text-decoration: underline;
+}
+
+h2, h3 {
+  color: #1565ff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: left;
+}
+th {
+  background: #f0f4ff;
+}
+
+.sentiment-positive { color: #2e7d32; font-weight: 600; }
+.sentiment-negative { color: #c62828; font-weight: 600; }
+.sentiment-neutral  { color: #757575; font-weight: 600; }
+.sentiment-mixed    { color: #ef6c00; font-weight: 600; }
+
+form {
+  margin: 15px 0;
+}
+input[type="text"], input[type="file"] {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+button {
+  padding: 8px 18px;
+  background: #1565ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background: #0d47d9;
+}
+
+img {
+  max-width: 100%;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin: 15px 0;
+}

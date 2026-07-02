@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sales Trend Analysis</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="topnav">
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('sales_analysis') }}" class="active">Sales Analysis</a>
+    <a href="{{ url_for('feedback_analysis') }}">Feedback Analysis</a>
+  </nav>
+
+  <div class="container">
+    <h2>Seasonal Sales Pattern</h2>
+    {% if chart_b64 %}
+      <img src="data:image/png;base64,{{ chart_b64 }}" alt="Seasonal Sales Pattern">
+    {% endif %}
+
+    <h3>Key Insights</h3>
+    <ul>
+      <li><strong>Winter &amp; Festive Sales:</strong> Higher demand for warm clothing.</li>
+      <li><strong>Summer Sales:</strong> Lightweight cotton products are popular.</li>
+      <li><strong>Off-Seasons:</strong> Lower sales, production optimization needed.</li>
+    </ul>
+
+    <h3>Product Recommendations</h3>
+    <form method="post">
+      <label for="product_id">Enter Product ID:</label>
+      <input type="text" id="product_id" name="product_id" value="{{ product_id }}" placeholder="e.g. P0166">
+      <button type="submit">Analyze</button>
+    </form>
+
+    {% if target_product is not none %}
+      <p><strong>{{ product_id }}</strong> — {{ target_product.Product_Type }} ({{ target_product.Material }}, {{ target_product.Color }})</p>
+      {% if recommendations %}
+        <table>
+          <thead>
+            <tr><th>Product ID</th><th>Type</th><th>Material</th><th>Color</th><th>Sales</th></tr>
+          </thead>
+          <tbody>
+            {% for r in recommendations %}
+            <tr>
+              <td>{{ r.Product_ID }}</td>
+              <td>{{ r.Product_Type }}</td>
+              <td>{{ r.Material }}</td>
+              <td>{{ r.Color }}</td>
+              <td>{{ r.Sales_Data }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No similar products found.</p>
+      {% endif %}
+    {% elif product_id %}
+      <p>Product ID "{{ product_id }}" not found in the dataset.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

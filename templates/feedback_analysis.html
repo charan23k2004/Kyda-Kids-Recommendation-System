@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback Analysis</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="topnav">
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('sales_analysis') }}">Sales Analysis</a>
+    <a href="{{ url_for('feedback_analysis') }}" class="active">Feedback Analysis</a>
+  </nav>
+
+  <div class="container">
+    <h2>Upload CSV File</h2>
+    <form method="post" enctype="multipart/form-data">
+      <input type="file" name="csv_file" accept=".csv">
+      <button type="submit">Upload</button>
+    </form>
+    {% if using_default %}
+      <p><em>Currently using the sample dataset (data/textile_product.csv). Upload your own CSV to override.</em></p>
+    {% endif %}
+
+    <h2>Search &amp; Analyze Product</h2>
+    <form method="get">
+      <label for="product_id">Enter Product ID:</label>
+      <input type="text" id="product_id" name="product_id" value="{{ product_id }}" placeholder="e.g. P0166">
+      <button type="submit">Perform Analysis</button>
+    </form>
+
+    {% if chart_b64 %}
+      <img src="data:image/png;base64,{{ chart_b64 }}" alt="Sentiment Chart">
+    {% endif %}
+
+    {% if table_rows %}
+      <table>
+        <thead>
+          <tr>
+            <th>Product ID</th><th>Type</th><th>Color</th><th>Material</th>
+            <th>Sentiment</th><th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in table_rows %}
+          <tr>
+            <td>{{ row.Product_ID }}</td>
+            <td>{{ row.Product_Type }}</td>
+            <td>{{ row.Color }}</td>
+            <td>{{ row.Material }}</td>
+            <td class="sentiment-{{ row.Sentiment|lower }}">{{ row.Sentiment }}</td>
+            <td>
+              {% if row.Sentiment == "Positive" %}
+                No Action Needed
+              {% else %}
+                <details>
+                  <summary>Show Reasons</summary>
+                  Areas to Improve: {{ row.Reasons|join(', ') }}
+                </details>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% elif product_id %}
+      <p>No feedback found for Product ID "{{ product_id }}".</p>
+    {% endif %}
+  </div>
+</body>
+</html>
